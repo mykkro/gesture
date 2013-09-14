@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Minimal webcam hand gesture example</title>
+
+		<meta name="author" content="William Wu (reveal.js by Hakim El Hattab)">
+		<meta name="author" content="Myrousz">
+
+		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+
+	</head>
+
+	<body>
+		<h1>Webcam Simple Control</h1>
+		<h2>Based on a sample from: <a href="http://www.chromeexperiments.com/detail/gesture-based-revealjs/">http://www.chromeexperiments.com/detail/gesture-based-revealjs/</a></h2>
+		<h3>Original demo here: <a href="http://revealjs.herokuapp.com/">http://revealjs.herokuapp.com/</a></a>
+
+		<!-- add this to your page -->		
+		<script src="gesture.js"></script>	
+		<style>
+			#direction-controls { display: none; position: fixed; bottom: 10px; left: 10px; width: 200px; height: 200px; }
+			#direction-controls .button:hover { fill: lightgreen; }
+			#direction-controls .button.active { fill: darkgreen; }
+		</style>
+		<svg id="direction-controls">
+			<!-- the control should have elements with class=button DIR, where DIR is one of [left,right,up,down,fire]. -->			
+		  	<rect width="200" height="200" rx="20" ry="20" fill="#abc"></rect>
+		  	<defs>
+		    	<path id="triangle" d="m-50,-43.3 l100,0 l-50,86.6 z"></path>
+		  	</defs>
+		  	<g stroke="#333" fill="darkgray">
+			  <use class="button down" xlink:href="#triangle" transform="translate(100,160) scale(0.5) " />
+			  <use class="button up" xlink:href="#triangle" transform="translate(100,40) scale(0.5) rotate(180)" />
+			  <use class="button right" xlink:href="#triangle" transform="translate(160,100) scale(0.5) rotate(270)" />
+			  <use class="button left" xlink:href="#triangle" transform="translate(40,100) scale(0.5) rotate(90) " />
+			  <circle class="button fire" cx="100" cy="100" r="20"></circle>
+			</g>
+		</svg>
+		<script>
+		$(function() {
+			/* initialize gesture sensor */
+			var gs = GestureSensor({
+				debug: false, 
+				controlPanelId: "direction-controls",
+				action: handler
+			})
+
+			var handler = function(evt) {
+				console.log(evt)
+			}
+
+		})
+		</script>	
+		<!-- end snippet -->
+
+    </body>
+</html>
